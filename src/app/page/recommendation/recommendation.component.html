@@ -1,0 +1,24 @@
+<div>
+  <div class="card" style="width: 90vw;">
+  <label class="title">Recommandation<button class="addButton">Ajouter une recommandation</button></label>
+  <div style="margin: auto">
+    <table>
+      <tr class="row" style="padding: 13px 10px 13px 10px;">
+        <th style="width: 10vw;"></th>
+        <td style="width: 10vw;">Titre</td>
+        <td style="width: 10vw;">Sous Titre</td>
+        <td style="width: 20vw;">Lien</td>
+        <td style="width: 20vw;">Description</td>
+      </tr>
+      <tr class="row" *ngFor="let boucle of boucles" style="height: 50px; display: table">
+        <td style="width: 5vw;"><button><span class="glyphicon glyphicon-pencil"></span></button></td>
+        <td style="width: 5vw;"><button><span class="glyphicon glyphicon-remove"></span></button></td>
+        <td style="width: 10vw;">Facebook</td>
+        <td style="width: 10vw;">Page de Réseau VDI</td>
+        <td style="width: 20vw;">https://www.facebook.com/appsreseauvdi/?fref=ts</td>
+        <td style="width: 20vw;">Rejoignez-nous sur notre page facebook pour garder le contact et la proximité autour de nos actualités.</td>
+      </tr>
+    </table>
+  </div>
+  </div>
+</div>

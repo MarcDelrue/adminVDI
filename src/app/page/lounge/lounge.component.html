@@ -1,0 +1,20 @@
+<div>
+  <div class="card" style="width: 90vw;">
+  <label class="title">Salons<button class="addButton">Ajouter un salon</button></label>
+  <div style="margin: auto">
+    <table>
+      <tr class="row" style="padding: 13px 10px 13px 10px;">
+        <th style="width: 10vw;"></th>
+        <td style="width: 50vw">Département + Ville</td>
+        <th>Date</th>
+      </tr>
+      <tr class="row" *ngFor="let boucle of boucles" style="padding: 10px;">
+        <td style="width: 5vw"><button><span class="glyphicon glyphicon-pencil"></span></button></td>
+        <td style="width: 5vw"><button><span class="glyphicon glyphicon-remove"></span></button></td>
+        <td style="width: 50vw">62 Pas de Calais</td>
+        <td style="width: 10vw">01/01</td>
+      </tr>
+    </table>
+  </div>
+  </div>
+</div>

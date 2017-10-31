@@ -1,0 +1,27 @@
+/* Style the tab */
+div.tab {
+    overflow: hidden;
+     padding:0;
+     margin:0;
+}
+
+.tablinks:hover {
+    background-color: #FFF;
+    color: #753f63;
+}
+
+.tablinks:active {
+    background-color: #FFF;
+    color: #753f63;
+}
+
+/* Style the buttons inside the tab */
+.tablinks {
+    font-size: 16px;
+    background-color: rgba(0,0,0,0);
+    float: left;
+    border: none;
+    color: #FFF;
+    cursor: pointer;
+    padding: 14px 16px;
+}

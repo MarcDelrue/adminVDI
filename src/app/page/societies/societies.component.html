@@ -1,0 +1,18 @@
+<div>
+  <div class="card" style="width: 90vw;">
+  <label class="title">Sociétés<button class="addButton">Ajouter une société</button></label>
+  <div style="margin: auto">
+    <table>
+      <tr class="row" style="padding: 10px;">
+        <th style="width: 20vw"></th>
+        <th>Nom de société</th>
+      </tr>
+      <tr class="row" *ngFor="let boucle of boucles" style="padding: 10px;">
+        <td style="width: 10vw"><button><span class="glyphicon glyphicon-pencil"></span></button></td>
+        <td style="width: 10vw"><button><span class="glyphicon glyphicon-remove"></span></button></td>
+        <td style="width: 50vw">Nom</td>
+      </tr>
+    </table>
+  </div>
+  </div>
+</div>
