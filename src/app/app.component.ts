@@ -9,6 +9,11 @@ import { LoginComponent } from './page/login/login.component';
 export class AppComponent {
   title = 'app';
   page: string = 'categories';
+  login = false;
+
+  ngOnInit() {
+    console.log("not connecter");
+  }
 
   changePage(page)
   {

@@ -1,18 +1,33 @@
 <div>
   <div class="card" style="width: 90vw;">
-  <label class="title">Salons<button class="addButton">Ajouter un salon</button></label>
+    <div style="display: inline-block">
+  <label class="title">Salons</label>
+    <button [hidden]="showAddLounge" class="addButton smaller" (click)="addLounge(newlounge)" style="padding: 5px 5px 6px 5px">
+      <span class="glyphicon glyphicon-ok"></span>
+    </button>
+    <button [hidden]="showAddLounge" class="addButton smaller" (click)="showAddLounge = !showAddLounge" style="padding: 5px 5px 6px 5px">
+      <span class="glyphicon glyphicon-remove"></span>
+    </button>
+    <my-date-picker name="mydate" [hidden]="showAddLounge" [options]="myDatePickerOptions" class="addButton smaller loungeform" style="border: none" [(ngModel)]="newlounge.date" required></my-date-picker>
+    <label for="file" [hidden]="showAddLounge" class="label-file addButton smaller loungeform" style="padding: 5px 0 6px 0;">Choisir une affiche</label>
+    <input id="file" [hidden]="showAddLounge" class="input-file" type="file">
+    <!-- <input type="file" [hidden]="showAddLounge" class="addButton smaller loungeform" [(ngModel)]="newlounge.img"> -->
+    <input placeholder="Ville" [hidden]="showAddLounge" class="addButton smaller loungeform" [(ngModel)]="newlounge.city" style="padding: 5px 0 6px 0">
+    <input placeholder="Département" [hidden]="showAddLounge" class="addButton smaller loungeform" [(ngModel)]="newlounge.department" style="padding: 5px 0 6px 0">
+    <button mat-raised-button (click)="showAddLounge = !showAddLounge" [hidden]="!showAddLounge" class="addButton"><label class="title">Ajouter un salon</label></button>
+  </div>
   <div style="margin: auto">
     <table>
       <tr class="row" style="padding: 13px 10px 13px 10px;">
         <th style="width: 10vw;"></th>
-        <td style="width: 50vw">Département + Ville</td>
+        <th style="width: 50vw">Département + Ville</th>
         <th>Date</th>
       </tr>
       <tr class="row" *ngFor="let boucle of boucles" style="padding: 10px;">
         <td style="width: 5vw"><button><span class="glyphicon glyphicon-pencil"></span></button></td>
-        <td style="width: 5vw"><button><span class="glyphicon glyphicon-remove"></span></button></td>
-        <td style="width: 50vw">62 Pas de Calais</td>
-        <td style="width: 10vw">01/01</td>
+        <td style="width: 5vw"><button (click)='removeLounge(boucle)'><span class="glyphicon glyphicon-remove"></span></button></td>
+        <td style="width: 50vw">{{boucle.department}} {{boucle.city}}</td>
+        <td style="width: 10vw">{{boucle.date}}</td>
       </tr>
     </table>
   </div>

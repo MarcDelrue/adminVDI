@@ -1,6 +1,12 @@
 <div>
   <div class="card" style="width: 90vw;">
-  <label class="title">Sociétés<button class="addButton">Ajouter une société</button></label>
+  <label class="title">Sociétés
+    <button [hidden]="showAddSociety" class="addButton" (click)="addSociety(newNameSoc)">
+      <span *ngIf="newNameSoc != ''" class="glyphicon glyphicon-ok"></span>
+      <span *ngIf="newNameSoc == ''" class="glyphicon glyphicon-remove"></span>
+    </button>
+    <input placeholder="Nom de la société" [hidden]="showAddSociety" class="addButton" [(ngModel)]="newNameSoc">
+    <button class="addButton" mat-raised-button (click)="showAddSociety = !showAddSociety" [hidden]="!showAddSociety">Ajouter une société</button></label>
   <div style="margin: auto">
     <table>
       <tr class="row" style="padding: 10px;">
@@ -8,9 +14,16 @@
         <th>Nom de société</th>
       </tr>
       <tr class="row" *ngFor="let boucle of boucles" style="padding: 10px;">
-        <td style="width: 10vw"><button><span class="glyphicon glyphicon-pencil"></span></button></td>
-        <td style="width: 10vw"><button><span class="glyphicon glyphicon-remove"></span></button></td>
-        <td style="width: 50vw">Nom</td>
+        <td style="width: 10vw">
+          <button *ngIf="!boucle.editing" (click)="updateSociety(boucle, 'n')"><span class="glyphicon glyphicon-pencil"></span></button>
+          <button *ngIf="boucle.editing" (click)="updateSociety(boucle, 'n')"><span class="glyphicon glyphicon-minus"></span></button>
+        </td>
+        <td style="width: 10vw"><button (click)="removeSoc(boucle)"><span class="glyphicon glyphicon-remove"></span></button></td>
+        <td *ngIf="boucle.editing" style="width: 50vw"><input class="rubberAppeare" [(ngModel)]="fakechange">
+          <button class="rubberAppeare" (click)="updateSociety(boucle, 'y')"><span class="glyphicon glyphicon-ok"></span></button>
+          <button class="rubberAppeare" (click)="updateSociety(boucle, 'n')"><span class="glyphicon glyphicon-remove"></span></button>
+        </td>
+        <td *ngIf="!boucle.editing" style="width: 50vw">{{boucle.name}}</td>
       </tr>
     </table>
   </div>

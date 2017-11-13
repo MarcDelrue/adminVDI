@@ -1,6 +1,13 @@
 <div>
   <div class="card" style="width: 90vw;">
-  <label class="title">Catégories <button class="addButton">Ajouter une catégorie</button></label>
+  <label class="title">Catégories
+    <button [hidden]="showAddCategorie" class="addButton" (click)="addCategorie(newNameCat)">
+      <span *ngIf="newNameCat != ''" class="glyphicon glyphicon-ok"></span>
+      <span *ngIf="newNameCat == ''" class="glyphicon glyphicon-remove"></span>
+    </button>
+    <input placeholder="Nom de la catégorie" [hidden]="showAddCategorie" class="addButton" [(ngModel)]="newNameCat">
+    <button [hidden]="!showAddCategorie" mat-raised-button class="addButton" (click)="inputCategorie()">Ajouter une catégorie</button>
+  </label>
   <div style="margin: auto">
     <table>
       <tr class="row" style="padding: 10px;">
@@ -9,13 +16,32 @@
         <th>Description</th>
       </tr>
       <tr class="row" *ngFor="let boucle of boucles" style="padding: 10px;">
-        <td style="width: 15vw"><button>Ajouter une société</button></td>
-        <td style="width: 5vw"><button><span class="glyphicon glyphicon-pencil"></span></button></td>
-        <td style="width: 5vw"><button><span class="glyphicon glyphicon-remove"></span></button></td>
-        <td style="width: 5vw"><button><span class="glyphicon glyphicon-search"></span></button></td>
-        <td style="width: 40vw">desc</td>
+        <td style="width: 15vw">
+          <button [hidden]="boucle.showAddSociety" (click)='boucle.showAddSociety = !boucle.showAddSociety'>Ajouter une société</button>
+          <select [hidden]="!boucle.showAddSociety" class="rubberAppeareLeft">
+            <option disabled selected value>Sélectionnez une société</option>
+            <option *ngFor="let x of soc">{{x.name}}</option>
+          </select>
+          <button [hidden]="!boucle.showAddSociety" class="rubberAppeareLeft" (click)="boucle.showAddSociety = !boucle.showAddSociety"><span class="glyphicon glyphicon-ok"></span></button>
+          <button [hidden]="!boucle.showAddSociety" class="rubberAppeareLeft" (click)="boucle.showAddSociety = !boucle.showAddSociety"><span class="glyphicon glyphicon-remove"></span></button>
+        </td>
+        <td style="width: 5vw">
+          <button *ngIf="!boucle.editing" (click)="updateCategorie(boucle, 'n')"><span class="glyphicon glyphicon-pencil"></span></button>
+          <button *ngIf="boucle.editing" (click)="updateCategorie(boucle, 'n')"><span class="glyphicon glyphicon-minus"></span></button>
+        </td>
+        <td style="width: 5vw"><button (click)='removeCategorie(boucle)'><span class="glyphicon glyphicon-remove"></span></button></td>
+        <td style="width: 5vw"><button (click)="showSocieties(boucle)"><span class="glyphicon glyphicon-search"></span></button></td>
+        <td *ngIf="boucle.editing" style="width: 40vw"><input class="rubberAppeare" [(ngModel)]="fakechange">
+          <button class="rubberAppeare" (click)="updateCategorie(boucle, 'y')"><span class="glyphicon glyphicon-ok"></span></button>
+          <button class="rubberAppeare" (click)="updateCategorie(boucle, 'n')"><span class="glyphicon glyphicon-remove"></span></button>
+        </td>
+        <td *ngIf="!boucle.editing" style="width: 40vw">{{boucle.name}}</td>
+        <td></td>
       </tr>
     </table>
   </div>
+  </div>
+  <div *ngIf="showSoc" class="card" style="width: 90vw">
+    <label class="title">{{socSelected}}</label>
   </div>
 </div>

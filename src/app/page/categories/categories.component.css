@@ -27,11 +27,94 @@
   border-radius: 5px;
   background-color: rgba(0,0,0,0);
   border: 2px solid #753F63;
+  animation-name: switchButtonInput;
+  animation-duration: 500ms;
+}
+
+
+.rubberAppeareLeft {
+  animation-name: switchButtonInputLeft;
+  animation-duration: 500ms;
+}
+
+@keyframes switchButtonInputLeft {
+  from, 60%, 75%, 90%, to {
+     animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+   }
+
+   from {
+     opacity: 0;
+     transform: translate3d(-3000px, 0, 0);
+   }
+
+   60% {
+     opacity: 1;
+     transform: translate3d(20px, 0, 0);
+   }
+
+   75% {
+     transform: translate3d(-10px, 0, 0);
+   }
+
+   90% {
+     transform: translate3d(5px, 0, 0);
+   }
+
+   to {
+     transform: translate3d(0, 0, 0);
+   }
+}
+
+
+.rubberAppeare {
+  animation-name: switchButtonInput;
+  animation-duration: 500ms;
+}
+
+@keyframes switchButtonInput {
+  from, 60%, 75%, 90%, to {
+     animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+   }
+
+   from {
+     opacity: 0;
+     transform: translate3d(3000px, 0, 0);
+   }
+
+   60% {
+     opacity: 1;
+     transform: translate3d(-20px, 0, 0);
+   }
+
+   75% {
+     transform: translate3d(10px, 0, 0);
+   }
+
+   90% {
+     transform: translate3d(-5px, 0, 0);
+   }
+
+   to {
+     transform: translate3d(0, 0, 0);
+   }
 }
 
 tbody tr:nth-child(even){
+  border-radius: 5px;
   background-color:	rgba(117, 63, 99, 0.8);
   color: #FFF;
+}
+
+input:nth-child(odd){
+  background-color:	rgba(117, 63, 99, 0.8);
+  color: #FFF;
+  border: none;
+}
+
+select{
+  background-color:	rgba(117, 63, 99, 0.8);
+  color: #FFF;
+  border: none;
 }
 
 table {
@@ -46,7 +129,7 @@ th {
   font-style: oblique;
 }
 
-tbody button:nth-child(odd) {
+tbody button {
   border-radius: 5px;
   background-color: rgba(0,0,0,0);
   border: 2px solid #753F63;

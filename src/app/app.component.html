@@ -1,28 +1,46 @@
-<div style="background-image : url('assets/img/fond_header.jpg'); background-size: cover" class="tab">
-  <button class="tablinks">
-    Logo
-  </button>
-  <button (click)="changePage('categories')" class="tablinks" value="categories">
-    Catégories
-  </button>
-  <button (click)="changePage('societies')" class="tablinks" value="societies">
-    Sociétés
-  </button>
-  <button (click)="changePage('vdi')" class="tablinks" value="vdi">
-    VDI
-  </button>
-  <button (click)="changePage('lounge')" class="tablinks" value="lounge">
-    Salons
-  </button>
-  <button (click)="changePage('recommendation')" class="tablinks" value="recommendation">
-    Recommandation
-  </button>
-  <button (click)="changePage('deconnexion')" class="tablinks" value="deconnexion">
-    Déconnexion
-  </button>
+<div *ngIf="!login">
+  <div class="background-theme">
+    <div class="card">
+      <h1 class="middle">
+        Page de connexion
+      </h1>
+      <div class="middle">
+        <input class="login-input" placeholder="Identifiant">
+      </div>
+      <div class="middle">
+        <input class="login-input" placeholder="Mot de passe">
+      </div>
+      <button (click)="login = !login" class="login-button">Connexion</button>
+    </div>
+  </div>
 </div>
-<app-categories *ngIf="page == 'categories'"></app-categories>
-<app-societies *ngIf="page == 'societies'"></app-societies>
-<app-vdi *ngIf="page == 'vdi'"></app-vdi>
-<app-lounge *ngIf="page == 'lounge'"></app-lounge>
-<app-recommendation *ngIf="page == 'recommendation'"></app-recommendation>
+<div *ngIf="login">
+  <div style="background-image : url('assets/img/fond_header.jpg'); background-size: cover" class="tab">
+    <button class="tablinks">
+      Logo
+    </button>
+    <button (click)="changePage('categories')" class="tablinks" value="categories">
+      Catégories
+    </button>
+    <button (click)="changePage('societies')" class="tablinks" value="societies">
+      Sociétés
+    </button>
+    <button (click)="changePage('vdi')" class="tablinks" value="vdi">
+      VDI
+    </button>
+    <button (click)="changePage('lounge')" class="tablinks" value="lounge">
+      Salons
+    </button>
+    <!-- <button (click)="changePage('recommendation')" class="tablinks" value="recommendation">
+      Recommandation
+    </button> -->
+    <button (click)="login = !login" class="tablinks" value="deconnexion">
+      Déconnexion
+    </button>
+  </div>
+  <app-categories *ngIf="page == 'categories'"></app-categories>
+  <app-societies *ngIf="page == 'societies'"></app-societies>
+  <app-vdi *ngIf="page == 'vdi'"></app-vdi>
+  <app-lounge *ngIf="page == 'lounge'"></app-lounge>
+  <app-recommendation *ngIf="page == 'recommendation'"></app-recommendation>
+</div>
