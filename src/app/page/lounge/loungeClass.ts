@@ -1,6 +1,8 @@
 export class lounge {
-  department: string = '';
+  description: string = '';
   city: string = '';
-  date: string = '';
+  date: Object = '';
   img : string = '';
+  user: any = [];
+  company: any = [];
 }

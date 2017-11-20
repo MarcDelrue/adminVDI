@@ -76,6 +76,13 @@ tbody input:nth-child(odd){
   border: none;
 }
 
+tbody select:nth-child(odd){
+  background-color:	rgba(117, 63, 99, 0.8);
+  color: #FFF;
+  border: none;
+}
+
+
 table {
     color: #753f63;
     border-collapse: collapse;

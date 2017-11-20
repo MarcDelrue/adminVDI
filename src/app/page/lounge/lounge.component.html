@@ -8,26 +8,46 @@
     <button [hidden]="showAddLounge" class="addButton smaller" (click)="showAddLounge = !showAddLounge" style="padding: 5px 5px 6px 5px">
       <span class="glyphicon glyphicon-remove"></span>
     </button>
-    <my-date-picker name="mydate" [hidden]="showAddLounge" [options]="myDatePickerOptions" class="addButton smaller loungeform" style="border: none" [(ngModel)]="newlounge.date" required></my-date-picker>
+    <input placeholder="Description" [hidden]="showAddLounge" class="addButton smaller loungeform" [(ngModel)]="newlounge.description" style="padding: 5px 0 6px 0; width: 32vw">
+    <my-date-picker name="mydate" [hidden]="showAddLounge" [options]="myDatePickerOptionsNew" class="addButton smaller loungeform" style="border: none" [(ngModel)]="newlounge.date" required [selector]="selector"></my-date-picker>
     <label for="file" [hidden]="showAddLounge" class="label-file addButton smaller loungeform" style="padding: 5px 0 6px 0;">Choisir une affiche</label>
     <input id="file" [hidden]="showAddLounge" class="input-file" type="file">
     <!-- <input type="file" [hidden]="showAddLounge" class="addButton smaller loungeform" [(ngModel)]="newlounge.img"> -->
+    <select [hidden]="showAddLounge" class="addButton smaller loungeform" [(ngModel)]="newlounge.company" style="padding: 5px 0 8px 0">
+      <option selected disabled value="">Société</option>
+      <option value="{{society.id}}" *ngFor="let society of companies">
+        {{society.name}}
+      </option>
+    </select>
     <input placeholder="Ville" [hidden]="showAddLounge" class="addButton smaller loungeform" [(ngModel)]="newlounge.city" style="padding: 5px 0 6px 0">
-    <input placeholder="Département" [hidden]="showAddLounge" class="addButton smaller loungeform" [(ngModel)]="newlounge.department" style="padding: 5px 0 6px 0">
     <button mat-raised-button (click)="showAddLounge = !showAddLounge" [hidden]="!showAddLounge" class="addButton"><label class="title">Ajouter un salon</label></button>
   </div>
   <div style="margin: auto">
     <table>
       <tr class="row" style="padding: 13px 10px 13px 10px;">
         <th style="width: 10vw;"></th>
-        <th style="width: 50vw">Département + Ville</th>
-        <th>Date</th>
+        <th style="width: 10vw">Ville</th>
+        <th style="width: 10vw">Date</th>
+        <th style="width: 40vw">Description</th>
       </tr>
-      <tr class="row" *ngFor="let boucle of boucles" style="padding: 10px;">
-        <td style="width: 5vw"><button><span class="glyphicon glyphicon-pencil"></span></button></td>
-        <td style="width: 5vw"><button (click)='removeLounge(boucle)'><span class="glyphicon glyphicon-remove"></span></button></td>
-        <td style="width: 50vw">{{boucle.department}} {{boucle.city}}</td>
-        <td style="width: 10vw">{{boucle.date}}</td>
+      <tr class="row" *ngFor="let event of events" style="padding: 10px;">
+        <td *ngIf="!event.editing" style="width: 5vw"><button (click)="editLounge(event, 'n')"><span class="glyphicon glyphicon-pencil"></span></button></td>
+        <td *ngIf="event.editing" style="width: 5vw"><button (click)="editLounge(event, 'n')"><span class="glyphicon glyphicon-minus"></span></button></td>
+        <td style="width: 5vw"><button (click)='removeLounge(event)'><span class="glyphicon glyphicon-remove"></span></button></td>
+        <td *ngIf="!event.editing" style="width: 10vw" class="rubberAppeare">{{event.city}}</td>
+        <td *ngIf="!event.editing" style="width: 10vw" class="rubberAppeare">{{event.date | date: "dd/MM/yy"}}</td>
+        <td *ngIf="!event.editing" style="width: 40vw" class="rubberAppeare">{{event.description}}</td>
+        <td *ngIf="event.editing" style="width: 10vw" class="rubberAppeare"><input [(ngModel)]="event.city"></td>
+        <td *ngIf="event.editing" style="width: 10vw" class="rubberAppeare">
+          <my-date-picker [options]="myDatePickerOptions" style="border: none;" [(ngModel)]="DatepickerDate"></my-date-picker>
+        </td>
+        <td *ngIf="event.editing" style="width: 30vw" class="rubberAppeare">
+          <input style="width: 30vw;" [(ngModel)]="event.description">
+        </td>
+        <td *ngIf="event.editing">
+          <button class="rubberAppeare" style="margin-left: 5px" (click)="editLounge(event, 'y')"><span class="glyphicon glyphicon-ok"></span></button>
+          <button class="rubberAppeare" (click)="editLounge(event, 'n')"><span class="glyphicon glyphicon-remove"></span></button>
+        </td>
       </tr>
     </table>
   </div>

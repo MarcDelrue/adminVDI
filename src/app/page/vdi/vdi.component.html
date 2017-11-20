@@ -16,12 +16,12 @@
     <!-- <input placeholder="Société" [hidden]="showAddVdi" class="addButton smaller vdiform" [(ngModel)]="newvdi.society"> -->
     <select [(ngModel)]="newvdi.society" [hidden]="showAddVdi" class="addButton smaller vdiform" style="padding: 2px 0 3px 0">
       <option selected disabled value="">Société</option>
-      <option value="society.name" *ngFor="let society of societies">
+      <option value="{{society.name}}" *ngFor="let society of companies">
         {{society.name}}
       </option>
     </select>
     <input placeholder="Email" [hidden]="showAddVdi" class="addButton smaller vdiform" [(ngModel)]="newvdi.email">
-    <input placeholder="Tél" type="number" [hidden]="showAddVdi" class="addButton smaller vdiform" [(ngModel)]="newvdi.phone">
+    <input placeholder="Tél" type="number" [hidden]="showAddVdi" class="addButton smaller vdiform" [(ngModel)]="newvdi.phone_number">
     <input placeholder="Adresse" [hidden]="showAddVdi" class="addButton smaller vdiform" [(ngModel)]="newvdi.address">
     <input placeholder="Prénom" [hidden]="showAddVdi" class="addButton smaller vdiform" [(ngModel)]="newvdi.first_name">
     <input placeholder="Nom" [hidden]="showAddVdi" class="addButton smaller vdiform" [(ngModel)]="newvdi.last_name">
@@ -42,28 +42,28 @@
         <th style="width: 10vw">Société</th>
         <th style="width: 10vw">Type</th>
       </tr>
-      <tr class="row" *ngFor="let boucle of boucles" style="padding: 13px 10px 13px 10px;">
-        <td style="width: 5vw"><button (click)="updateVdi(boucle, 'n')">
-          <span *ngIf='!boucle.edit' class="glyphicon glyphicon-pencil"></span>
-          <span *ngIf='boucle.edit' class="glyphicon glyphicon-minus"></span>
+      <tr class="row" *ngFor="let user of users" style="padding: 13px 10px 13px 10px;">
+        <td style="width: 5vw"><button (click)="updateVdi(user, 'n')">
+          <span *ngIf='!user.edit' class="glyphicon glyphicon-pencil"></span>
+          <span *ngIf='user.edit' class="glyphicon glyphicon-minus"></span>
         </button></td>
-        <td style="width: 5vw"><button (click)='removeSoc(boucle)'><span class="glyphicon glyphicon-remove"></span></button></td>
-        <td *ngIf="!boucle.edit" style="width: 10vw">{{boucle.last_name}}</td>
-        <td *ngIf="!boucle.edit" style="width: 10vw">{{boucle.first_name}}</td>
-        <td *ngIf="!boucle.edit" style="width: 10vw">{{boucle.address}}</td>
-        <td *ngIf="!boucle.edit" style="width: 10vw">{{boucle.phone}}</td>
-        <td *ngIf="!boucle.edit" style="width: 10vw">{{boucle.email}}</td>
-        <td *ngIf="!boucle.edit" style="width: 10vw">{{boucle.society}}</td>
-        <td *ngIf="!boucle.edit" style="width: 10vw">{{boucle.type}}</td>
-        <td *ngIf="boucle.edit" class="rubberAppeare" style="width: 10vw"><input [(ngModel)]="fakechange[1]"></td>
-        <td *ngIf="boucle.edit" class="rubberAppeare" style="width: 10vw"><input [(ngModel)]="fakechange[0]"></td>
-        <td *ngIf="boucle.edit" class="rubberAppeare" style="width: 10vw"><input [(ngModel)]="fakechange[2]"></td>
-        <td *ngIf="boucle.edit" class="rubberAppeare" style="width: 10vw"><input [(ngModel)]="fakechange[3]"></td>
-        <td *ngIf="boucle.edit" class="rubberAppeare" style="width: 10vw"><input [(ngModel)]="fakechange[4]"></td>
-        <td *ngIf="boucle.edit" class="rubberAppeare" style="width: 10vw"><input [(ngModel)]="fakechange[5]"></td>
-        <td *ngIf="boucle.edit" class="rubberAppeare" style="width: 10vw !important"><input style="width: 5vw;" [(ngModel)]="fakechange[6]">
-          <button class="rubberAppeare" (click)="updateVdi(boucle, 'y')"><span class="glyphicon glyphicon-ok"></span></button>
-          <button class="rubberAppeare" (click)="updateVdi(boucle, 'n')"><span class="glyphicon glyphicon-remove"></span></button>
+        <td style="width: 5vw"><button (click)='removeSoc(user)'><span class="glyphicon glyphicon-remove"></span></button></td>
+        <td *ngIf="!user.edit" style="width: 10vw">{{user.last_name}}</td>
+        <td *ngIf="!user.edit" style="width: 10vw">{{user.first_name}}</td>
+        <td *ngIf="!user.edit" style="width: 10vw">{{user.address}}</td>
+        <td *ngIf="!user.edit" style="width: 10vw">{{user.phone_number}}</td>
+        <td *ngIf="!user.edit" style="width: 10vw">{{user.email}}</td>
+        <td *ngIf="!user.edit" style="width: 10vw">{{user.company}}</td>
+        <td *ngIf="!user.edit" style="width: 10vw">{{user.type}}</td>
+        <td *ngIf="user.edit" class="rubberAppeare" style="width: 10vw"><input [(ngModel)]="fakechange[1]"></td>
+        <td *ngIf="user.edit" class="rubberAppeare" style="width: 10vw"><input [(ngModel)]="fakechange[0]"></td>
+        <td *ngIf="user.edit" class="rubberAppeare" style="width: 10vw"><input [(ngModel)]="fakechange[2]"></td>
+        <td *ngIf="user.edit" class="rubberAppeare" style="width: 10vw"><input [(ngModel)]="fakechange[3]"></td>
+        <td *ngIf="user.edit" class="rubberAppeare" style="width: 10vw"><input [(ngModel)]="fakechange[4]"></td>
+        <td *ngIf="user.edit" class="rubberAppeare" style="width: 10vw"><input [(ngModel)]="fakechange[5]"></td>
+        <td *ngIf="user.edit" class="rubberAppeare" style="width: 10vw !important"><input style="width: 5vw;" [(ngModel)]="fakechange[6]">
+          <button class="rubberAppeare" (click)="updateVdi(user, 'y')"><span class="glyphicon glyphicon-ok"></span></button>
+          <button class="rubberAppeare" (click)="updateVdi(user, 'n')"><span class="glyphicon glyphicon-remove"></span></button>
         </td>
       </tr>
     </table>

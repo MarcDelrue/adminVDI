@@ -1,32 +1,77 @@
 import { Component } from '@angular/core';
+import { Datastore } from '../../services/datastore.service';
+import { Company, Category, User } from '../../models/reseauvdiModels.model';
 
 @Component({
   selector: 'app-societies',
   templateUrl: './societies.component.html',
-  styleUrls: ['./societies.component.css']
+  styleUrls: ['./societies.component.css'],
+  providers: [Datastore]
 })
 export class SocietiesComponent {
-  boucles = [{name: "À la Claire Fontaine", editing: false}, {name: "Secrets de Miel", editing: false}, {name: "Allande-Tanais", editing: false}, {name: "Aromasun - Elixir d'Essences", editing: false}];
-  fakechange: string;
-  newNameSoc: string = '';
+  companies: Company[];
+  categories: Category[];
+  users: User[];
+  fakechange= {
+    name: '',
+    category: ''
+  };
+  newCompany= {
+    name: '',
+    category: ''
+  };
+  // newCompany: Company[];
   showAddSociety: boolean = true;
-  constructor() {}
+  constructor(private datastore: Datastore) {}
 
-  removeSoc(test) {
-      this.boucles.splice(this.boucles.findIndex(x => x.name == test.name), 1);
+  ngOnInit(){
+    this.datastore.findAll(Company, {include: 'category'}).subscribe(
+      data => {
+        console.log(data);
+        this.companies = data.getModels();
+      });
+    this.datastore.findAll(Category, {}).subscribe(
+      data => {
+        this.categories = data.getModels();
+      });
   }
 
-  addSociety(test) {
+  removeCompany(selectedCompany) {
+    this.datastore.deleteRecord(Company, selectedCompany.id).subscribe(data=> {console.log(data)});
+    this.companies.splice(this.companies.findIndex(x => x.name == selectedCompany.name), 1);
+  }
+
+  createSociety(newcompany) {
   this.showAddSociety = !this.showAddSociety;
-  if (test != "")
-    this.boucles.push({name: test, editing: false});
-  this.newNameSoc = "";
+  if (newcompany.name != "")
+  {
+    newcompany.category = this.datastore.peekRecord(Category, newcompany.category);
+    let company = this.datastore.createRecord(Company, {name: newcompany.name, category: newcompany.category});
+    company.save({include: 'category'}).subscribe(data=>{
+      console.log(data);
+      this.companies.push(data);
+  });
+  }
+  this.newCompany.name = "";
+  this.newCompany.category = "";
   }
 
-  updateSociety(boucle, choice) {
+  updateSociety(company, choice) {
+    console.log(company);
+    console.log(this.fakechange.category);
     if (choice == 'y')
-      boucle.name = this.fakechange;
-    this.fakechange = boucle.name;
-    boucle.editing = !boucle.editing;
+    {
+      company.name = this.fakechange.name;
+      company.category = this.fakechange.category;
+      // company.category.id = this.fakechange.category;
+      company.save().subscribe(
+        data=>{
+          console.log(data);
+          company.category = data.category;
+        });
+    }
+    this.fakechange.category = company.category;
+    this.fakechange.name = company.name;
+    company.editing = !company.editing;
   }
 }

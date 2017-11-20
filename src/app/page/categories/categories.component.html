@@ -15,33 +15,43 @@
         <th style="width: 15vw"></th>
         <th>Description</th>
       </tr>
-      <tr class="row" *ngFor="let boucle of boucles" style="padding: 10px;">
+      <tr class="row" *ngFor="let category of categories" style="padding: 10px;">
         <td style="width: 15vw">
-          <button [hidden]="boucle.showAddSociety" (click)='boucle.showAddSociety = !boucle.showAddSociety'>Ajouter une société</button>
-          <select [hidden]="!boucle.showAddSociety" class="rubberAppeareLeft">
+          <button [hidden]="category.showAddSociety" (click)='category.showAddSociety = !category.showAddSociety'>Ajouter une société</button>
+          <select [hidden]="!category.showAddSociety" class="rubberAppeareLeft">
             <option disabled selected value>Sélectionnez une société</option>
-            <option *ngFor="let x of soc">{{x.name}}</option>
+            <option *ngFor="let x of companies">{{x.name}}</option>
           </select>
-          <button [hidden]="!boucle.showAddSociety" class="rubberAppeareLeft" (click)="boucle.showAddSociety = !boucle.showAddSociety"><span class="glyphicon glyphicon-ok"></span></button>
-          <button [hidden]="!boucle.showAddSociety" class="rubberAppeareLeft" (click)="boucle.showAddSociety = !boucle.showAddSociety"><span class="glyphicon glyphicon-remove"></span></button>
+          <button [hidden]="!category.showAddSociety" class="rubberAppeareLeft" (click)="category.showAddSociety = !category.showAddSociety"><span class="glyphicon glyphicon-ok"></span></button>
+          <button [hidden]="!category.showAddSociety" class="rubberAppeareLeft" (click)="category.showAddSociety = !category.showAddSociety"><span class="glyphicon glyphicon-remove"></span></button>
         </td>
         <td style="width: 5vw">
-          <button *ngIf="!boucle.editing" (click)="updateCategorie(boucle, 'n')"><span class="glyphicon glyphicon-pencil"></span></button>
-          <button *ngIf="boucle.editing" (click)="updateCategorie(boucle, 'n')"><span class="glyphicon glyphicon-minus"></span></button>
+          <button *ngIf="!category.editing" (click)="updateCategorie(category, 'n')"><span class="glyphicon glyphicon-pencil"></span></button>
+          <button *ngIf="category.editing" (click)="updateCategorie(category, 'n')"><span class="glyphicon glyphicon-minus"></span></button>
         </td>
-        <td style="width: 5vw"><button (click)='removeCategorie(boucle)'><span class="glyphicon glyphicon-remove"></span></button></td>
-        <td style="width: 5vw"><button (click)="showSocieties(boucle)"><span class="glyphicon glyphicon-search"></span></button></td>
-        <td *ngIf="boucle.editing" style="width: 40vw"><input class="rubberAppeare" [(ngModel)]="fakechange">
-          <button class="rubberAppeare" (click)="updateCategorie(boucle, 'y')"><span class="glyphicon glyphicon-ok"></span></button>
-          <button class="rubberAppeare" (click)="updateCategorie(boucle, 'n')"><span class="glyphicon glyphicon-remove"></span></button>
+        <td style="width: 5vw"><button (click)='removeCategorie(category)'><span class="glyphicon glyphicon-remove"></span></button></td>
+        <td style="width: 5vw"><button (click)="showSocieties(category)"><span class="glyphicon glyphicon-search"></span></button></td>
+        <td *ngIf="category.editing" style="width: 40vw"><input class="rubberAppeare" [(ngModel)]="fakechange">
+          <button class="rubberAppeare" (click)="updateCategorie(category, 'y')"><span class="glyphicon glyphicon-ok"></span></button>
+          <button class="rubberAppeare" (click)="updateCategorie(category, 'n')"><span class="glyphicon glyphicon-remove"></span></button>
         </td>
-        <td *ngIf="!boucle.editing" style="width: 40vw">{{boucle.name}}</td>
+        <td *ngIf="!category.editing" style="width: 40vw">{{category.name}}</td>
         <td></td>
       </tr>
     </table>
   </div>
   </div>
-  <div *ngIf="showSoc" class="card" style="width: 90vw">
+  <div *ngIf="showSoc" class="card" style="width: 90vw;">
     <label class="title">{{socSelected}}</label>
+    <table style="margin: auto">
+      <tr class="row" style="padding: 10px;">
+        <th style="width: 5vw"></th>
+        <th style="width: 65vw">Sociétés:</th>
+      </tr>
+      <tr class="row" *ngFor="let society of companies" style="padding: 10px;">
+        <td style="width: 5vw;"><button><span class="glyphicon glyphicon-remove"></span></button></td>
+        <td style="width: 65vw">{{society.name}}</td>
+      </tr>
+    </table>
   </div>
 </div>

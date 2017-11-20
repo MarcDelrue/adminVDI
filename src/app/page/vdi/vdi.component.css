@@ -43,6 +43,9 @@
 .rubberAppeare {
   animation-name: switchButtonInput;
   animation-duration: 500ms;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 @keyframes switchButtonInput {

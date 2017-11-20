@@ -39,6 +39,12 @@
   animation-duration: 500ms;
 }
 
+
+.rubberAppeare {
+  animation-name: switchButtonInput;
+  animation-duration: 500ms;
+}
+
 @keyframes switchButtonInput {
   from, 60%, 75%, 90%, to {
      animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
@@ -68,8 +74,15 @@
 }
 
 tbody tr:nth-child(even){
+  border-radius: 5px;
   background-color:	rgba(117, 63, 99, 0.8);
   color: #FFF;
+}
+
+tbody input:nth-child(odd){
+  background-color:	rgba(117, 63, 99, 0.8);
+  color: #FFF;
+  border: none;
 }
 
 table {
@@ -84,7 +97,7 @@ th {
   font-style: oblique;
 }
 
-tbody button:nth-child(odd) {
+tbody button {
   border-radius: 5px;
   background-color: rgba(0,0,0,0);
   border: 2px solid #753F63;
